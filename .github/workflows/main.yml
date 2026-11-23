@@ -14,7 +14,7 @@ jobs:
         run: echo "welcome to our 1st GH action workflow"
 
       - name: checkout repo 
-        uses: actions/checkout@v2.8.0
+        uses: actions/checkout@v6.1.0
 
       - name: list repo files
         run: ls -la 
