@@ -1,17 +1,10 @@
-on:
-  workflow_dispatch:
-    inputs:
-      environment:
-         description: "choose env"
-         required: true
-         default: "staging"
-         type: choice
-         options:
-           - staging
-           - production
+on: 
+  repository_dispatch:
+    types:
+      - incident_report 
 jobs:
-  deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - name: deploy app
-          run: echo "deploying the application to ${{inputs.environment}}"
+  handel_incident:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print 
+        run: echo "incident report"
