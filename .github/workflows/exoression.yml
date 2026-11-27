@@ -1,0 +1,25 @@
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  expression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print a message
+        if: ${{ (github.event_name == 'push' || github.ref == 'refs/heads/main') && (github.event_name != 'push' || !contains(github.event.head_commit.message, 'WIP')) }}
+        run: echo "the job is running"
+      - name: tag 
+        run: echo "tag here"
+        if: {{  Startswith(github.ref, 'refs/tag/v' }}
+      - name: fail
+        if: ${{ failure() }}
+        run: echo "a previous step failed"
+
+      - name: cleanup
+        if: ${{ always() }}
+        run: echo "always runs"
+
+      - name: cancelled
+        if: ${{ cancelled() }}
+        run: echo "workflow was cancelled"
